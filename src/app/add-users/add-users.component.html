@@ -1,0 +1,47 @@
+<form [formGroup]="userForm" (ngSubmit)="SubmitForm()" class="mt-3">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="form-group">
+              <label for="nom" class="m-1">Nom <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="nom" id="nom" formControlName="nom" placeholder="Nom">
+              <div *ngIf="userForm.get('nom') && userForm.get('nom')" class="invalid-feedback">Nom est requis</div>
+            </div>
+            <div class="form-group">
+              <label for="prenom" class="m-1">Prénom <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="prenom" id="prenom" formControlName="prenom" placeholder="Prénom">
+              <div *ngIf="userForm.get('prenom') && userForm.get('prenom')" class="invalid-feedback">Prénom est requis</div>
+            </div>
+            <div class="form-group">
+              <label for="email" class="m-1">Email <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" name="email" id="email" formControlName="email" placeholder="Email">
+              <div *ngIf="userForm.get('email') && userForm.get('email')" class="invalid-feedback">Email invalide</div>
+            </div>
+            <div class="form-group">
+              <label for="adresse" class="m-1">Adresse</label>
+              <input type="text" class="form-control" name="adresse" id="adresse" formControlName="adresse" placeholder="Adresse">
+            </div>
+            <div class="form-group mt-3">
+              <label for="numeroTel" class="m-1">Numéro de téléphone</label>
+              <input type="tel" class="form-control" name="numeroTel" id="numeroTel" formControlName="numeroTel" placeholder="Numéro de téléphone">
+            </div>
+            <div class="form-group mt-3">
+              <label class="m-1">Rôle</label>
+              <select class="form-control" formControlName="role" placeholder="Sélectionnez un rôle">
+                <option value="" style="color: #999;" selected disabled hidden>Sélectionnez un rôle</option>
+                <option value="ROLE_ADMIN">Admin</option>
+                <option value="ROLE_UTILISATEUR">Utilisateur Simple</option>
+                <option value="ROLE_FINANCIER">Financier</option>
+              </select>
+            </div>
+            <div class="form-group mt-3">
+              <button type="submit" [disabled]="!userForm.valid" class="btn btn-primary btn-block">Ajouter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

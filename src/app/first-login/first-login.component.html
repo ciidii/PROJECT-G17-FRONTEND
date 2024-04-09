@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      Changement de mot de passe
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="changePassword()">
+        <div class="mb-3">
+          <label for="password" class="form-label">Nouveau mot de passe</label>
+          <input type="password" class="form-control" id="password" [(ngModel)]="newPassword" name="password" required>
+        </div>
+        <div class="error-message text-center mt-3">
+          <p class="text-danger">{{ passwordNotMachMessage }}</p>
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirmer le nouveau mot de passe</label>
+          <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword"
+                 name="confirmPassword" required>
+        </div>
+        <div class="error-message text-center mt-3">
+          <p class="text-danger">{{ passwordNotMachMessage }}</p>
+        </div>
+        <button type="submit" class="btn btn-primary">Changer le mot de passe</button>
+      </form>
+    </div>
+  </div>
+</div>
