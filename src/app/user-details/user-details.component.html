@@ -1,0 +1,46 @@
+<div class="modal modal-lg shadow-lg" id="myModal" #myModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+          <!--class="modal-title text-center"> {{ memberDetails?.firstname | titlecase }} {{ memberDetails?.name | uppercase }}</h4>
+        <button type="button" (click)="closeModal(user)" class="btn-close" data-bs-dismiss="modal"></button>
+        -->
+      </div>
+      <div class="modal-body">
+
+        <button  type="button" class="btn btn-outline-primary"
+                data-bs-dismiss="modal"><i class="bi bi-pencil"></i>
+        </button>
+        <button  type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
+          class="bi bi-trash"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="avatar">
+        <span class="bi bi-person-circle"></span>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <h2>{{ user.nom }} {{ user.prenom }}</h2>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Identifiant:</strong> {{ user.identifiant }}</p>
+      <p><strong>Adresse:</strong> {{ user.adresse }}</p>
+      <p><strong>Rôles:</strong> {{ user.roles }}</p>
+      <p><strong>Est activé:</strong> {{ user.activated ? 'Oui' : 'Non' }}</p>
+      <p><strong>Est bloqué:</strong> {{ isBlocked ? 'Oui' : 'Non' }}</p>
+      <p *ngIf="isBlocked"><strong>Date de levée du blocage:</strong> {{ blockExpirationDate }}</p>
+      <button class="btn btn-danger" (click)="blockUser()" *ngIf="!isBlocked">Bloquer l'utilisateur</button>
+      <button class="btn btn-success" (click)="unblockUser()" *ngIf="isBlocked">Débloquer l'utilisateur</button>
+      <button class="btn btn-warning" (click)="deleteUser()">Supprimer l'utilisateur</button>
+    </div>
+  </div>
+</div>
