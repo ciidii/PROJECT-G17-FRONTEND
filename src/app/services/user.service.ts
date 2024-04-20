@@ -38,4 +38,17 @@ export class UserService {
     };
     return this.http.post<Utilisateur>("http://localhost:8080/backend/utilisateurs/ajouter", JSON.stringify(user),options);
   }
+
+  bloquerUtilisateur(data: { idAdmin: number; dateDeLeveeAutomatique: null; idUtilisateur: number }) {
+    let options = {
+      headers: new HttpHeaders().set("Content-Type", "application/json"),
+    };
+    return this.http.put("http://localhost:8080/backend/utilisateurs/bloquer", JSON.stringify(data),options);
+  }
+  modifierUtilisateur(id:number,data:any) {
+    let options = {
+      headers: new HttpHeaders().set("Content-Type", "application/json"),
+    };
+    return this.http.put("http://localhost:8080/backend/utilisateurs/"+id, JSON.stringify(data),options);
+  }
 }

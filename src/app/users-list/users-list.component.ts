@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../services/user.service";
 import {Utilisateur} from "../models/Utilisateur";
 import {ToastrService} from "ngx-toastr";
+import {UserDetailModalComponent} from "../user-detail-modal/user-detail-modal.component";
 
 @Component({
   selector: 'app-users-list',
@@ -9,10 +10,23 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./users-list.component.css']
 })
 export class UsersListComponent implements OnInit {
+  @ViewChild(UserDetailModalComponent, {static: false}) userModal?: UserDetailModalComponent;
   utilisateurs!: Array<Utilisateur>
   pageSize: number = 10; // Nombre d'utilisateurs par page
   currentPage: number = 1; // Page actuelle
+  constructor(private userService: UserService, private toasterService: ToastrService) {
+  }
 
+  ngOnInit(): void {
+    this.userService.getUsers().subscribe({
+      next: data => {
+        this.utilisateurs = data
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
+  }
   get paginatedUtilisateurs() {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     return this.utilisateurs.slice(startIndex, startIndex + this.pageSize);
@@ -46,20 +60,9 @@ export class UsersListComponent implements OnInit {
     }
   }
 
-  constructor(private userService: UserService, private toasterService: ToastrService) {
+  open(user:Utilisateur){
+    this.userModal?.openModal(user)
   }
-
-  ngOnInit(): void {
-    this.userService.getUsers().subscribe({
-      next: data => {
-        this.utilisateurs = data
-      },
-      error: err => {
-        console.log(err)
-      }
-    })
-  }
-
   modifierUtilisateur(idUtilisateur: any) {
 
   }

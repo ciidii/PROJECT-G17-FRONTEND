@@ -1,0 +1,14 @@
+.edit-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #ccc;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.form-group:hover .edit-icon {
+  opacity: 1;
+}

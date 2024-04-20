@@ -1,64 +1,76 @@
 <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
   <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- Icône de profil et lien vers le profil utilisateur -->
+    <a class="navbar-brand" [routerLink]="['/G17GB/profile']">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           class="feather feather-user">
+        <path
+          d="M12 2c2.761 0 5 2.239 5 5 0 2.761-2.239 5-5 5s-5-2.239-5-5c0-2.761 2.239-5 5-5zm5 10c0 2.206-1.794 4-4 4H9c-2.206 0-4-1.794-4-4m8 4v2m-4-2v2m8-7.5a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0z"></path>
+      </svg>
+    </a>
+    <!-- Bouton pour afficher/cacher le menu sur les appareils mobiles -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarColor01">
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="">
-            <!-- Icône de profil -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                 class="feather feather-user">
-              <path
-                d="M12 2c2.761 0 5 2.239 5 5 0 2.761-2.239 5-5 5s-5-2.239-5-5c0-2.761 2.239-5 5-5zm5 10c0 2.206-1.794 4-4 4H9c-2.206 0-4-1.794-4-4m8 4v2m-4-2v2m8-7.5a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0z"></path>
-            </svg>
-          </a>
+        <!-- Catégories principales -->
+        <li *ngIf="authState.user.roles.includes('ROLE_ADMIN')" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+             aria-expanded="false">Utilisateurs</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" routerLink="admin/add-user">Ajouter</a>
+            <a class="dropdown-item" href="admin/">Afficher</a>
+          </div>
+        </li>
+        <li *ngIf="authState.user.roles.includes('ROLE_ADMIN') ||authState.user.roles.includes('ROLE_FINANCIER')" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+             aria-expanded="false">Articles</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" *ngIf="authState.user.roles.includes('ROLE_ADMIN')" [routerLink]="['admin/add-article']">Ajouter</a>
+            <a class="dropdown-item" *ngIf="authState.user.roles.includes('ROLE_FINANCIER')" href="">Afficher</a>
+            <a class="dropdown-item" *ngIf="authState.user.roles.includes('ROLE_FINANCIER')" href="#">Paramétre prix</a>
+            <a class="dropdown-item" *ngIf="authState.user.roles.includes('ROLE_FINANCIER')" href="#">Rendre Vendable</a>
+          </div>
+        </li>
+        <li *ngIf="authState.user.roles.includes('ROLE_ADMIN') ||authState.user.roles.includes('ROLE_FINANCIER')" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+             aria-expanded="false">Alertes</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Seuil article</a>
+            <a class="dropdown-item" href="#">annulation vente / utilisateur</a>
+            <a class="dropdown-item" href="#"> Fin de promotion</a>
+          </div>
         </li>
 
-        <li class="nav-item">
+        <li *ngIf="authState.user.roles.includes('ROLE_FINANCIER')"  class="nav-item">
+          <a class="nav-link" href="#">Promotion</a>
+        </li>
+        <li *ngIf="authState.user.roles.includes('ROLE_ADMIN')" class="nav-item">
           <a class="nav-link" href="#">Promotions</a>
+        </li>
+
+        <li *ngIf="authState.user.roles.includes('ROLE_UTILISATEUR')" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+             aria-expanded="false">Ventes</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Faires une vente</a>
+            <a class="dropdown-item" href="#">Mes Ventes</a>
+          </div>
+        </li>
+        <li *ngIf="authState.user.roles.includes('ROLE_UTILISATEUR')" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+             aria-expanded="false">Etat de caisse</a>
+          <div class="dropdown-menu">
+            <a  class="dropdown-item" href="#">Faire Etat de caisse</a>
+            <a *ngIf="authState.user.roles.includes('ROLE_ADMIN') ||authState.user.roles.includes('ROLE_FINANCIER')" class="dropdown-item" href="#">Valider de caisse</a>
+          </div>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Reporting</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" aria-haspopup="true"
-             aria-expanded="false">Alertes</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Ajouter</a>
-            <a class="dropdown-item" href="#">Afficher</a>
-            <a class="dropdown-item" href="#">Paramétre prix</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Rendre Vendable</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="admin/add-user">Vendre</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true"
-             aria-expanded="false">Articles</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Ajouter</a>
-            <a class="dropdown-item" href="#">Afficher</a>
-            <a class="dropdown-item" href="#">Paramétre prix</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Rendre Vendable</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true"
-             aria-expanded="false">Utilisateurs</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Ajouter</a>
-            <a class="dropdown-item" href="#">Afficher</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div>
         </li>
       </ul>
       <ul class="navbar-nav">

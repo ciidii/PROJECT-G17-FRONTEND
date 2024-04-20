@@ -1,1 +1,35 @@
-<p>add-article works!</p>
+<h4  class="text-center mt-3">Ajout d'article</h4>
+<form [formGroup]="articleForm" (ngSubmit)="ajouterArticle()" class="needs-validation" novalidate>
+  <div class="container p-3">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="mb-3">
+          <label for="nomArticle" class="form-label">Nom de l'article</label>
+          <input type="text" class="form-control" id="nomArticle" formControlName="nomArticle" placeholder="Nom de l'article" required>
+          <div class="invalid-feedback">
+            Veuillez entrer le nom de l'article.
+          </div>
+        </div>
+        <!-- Description de l'article -->
+        <div class="mb-3">
+          <label for="descriptionArticle" class="form-label">Description de l'article</label>
+          <textarea class="form-control" id="descriptionArticle" formControlName="descriptionArticle" placeholder="Description de l'article" required style="resize: none;"></textarea>
+          <div class="invalid-feedback">
+            Veuillez entrer la description de l'article.
+          </div>
+        </div>
+        <!-- Quantité en stock -->
+        <div class="mb-3">
+          <label for="qttStock" class="form-label">Quantité en stock</label>
+          <input type="number" class="form-control" id="qttStock" formControlName="qttStock" placeholder="Quantité en stock" required>
+          <div class="invalid-feedback">
+            Veuillez entrer la quantité en stock.
+          </div>
+        </div>
+        <!-- Bouton d'envoi -->
+        <button type="submit" class="btn btn-primary">Ajouter l'article</button>
+      </div>
+    </div>
+  </div>
+  <!-- Nom de l'article -->
+</form>

@@ -1,0 +1,7 @@
+#myModal{
+  background-color: rgba(143, 134, 134, 0.5);
+}
+
+strong{
+  user-select: none;
+}

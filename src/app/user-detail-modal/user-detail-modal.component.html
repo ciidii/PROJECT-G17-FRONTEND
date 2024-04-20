@@ -1,0 +1,43 @@
+<div class="modal modal-lg shadow-lg" id="myModal" #myModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+      <span class="rounded-circle bg-secondary text-light p-2" style="width: 50px; height: 50px;">
+        <i class="bi bi-person-fill" style="font-size: 1.5rem;"></i>
+      </span>
+        <h4 class="modal-title text-center m-1">{{ user?.nom | titlecase }} {{ user?.prenom | uppercase }}</h4>
+        <button type="button" (click)="closeModal(user)" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <p>Identifiant: {{ user?.idUtilisateur }}</p>
+        <p>Nom: {{ user?.nom }}</p>
+        <p>Prénom: {{ user?.prenom }}</p>
+        <p>Numéro de téléphone: {{ user?.numeroTel }}</p>
+        <p>E-mail: {{ user?.email }}</p>
+        <p>Identifiant: {{ user?.identifiant }}</p>
+        <p>Rôles:</p>
+        <ul>
+          <li *ngIf="user?.roles && user.roles.includes('ROLE_UTILISATEUR')">Utilisateur</li>
+          <li *ngIf="user?.roles && user.roles.includes('ROLE_ADMIN')">Administrateur</li>
+          <li *ngIf="user?.roles && user.roles.includes('ROLE_FINANCIER')">Financier</li>
+        </ul>
+        <p>Activé: {{ user?.activated ? 'Oui' : 'Non' }}</p>
+        <p>Bloqué: {{ user?.estBloquer ? 'Oui' : 'Non' }}</p>
+        <p>Première connexion: {{ user?.premierConnexion ? 'Oui' : 'Non' }}</p>
+        <!-- Ajoutez d'autres informations ici selon vos besoins -->
+        <div class="modal-footer">
+          <button type="button" *ngIf="!user.estBloquer" class="btn btn-outline-primary m-1" data-bs-dismiss="modal"><i class="bi bi-pencil"></i>
+          </button>
+          <button type="button" *ngIf="!user.estBloquer" class="btn btn-warning"  (click)="BloquerUtilisateur()">Bloquerrr</button>
+          <button type="button" *ngIf="user.estBloquer" class="btn btn-success"  (click)="annulerBloquage()">Annuler</button>
+          <input [(ngModel)]="blockExpirationDate"  id="dateLeverAutomatique" placeholder="dateLeverAutomatique" *ngIf="user.estBloquer" type="datetime-local">
+          <button *ngIf="!user.estBloquer" type="button" class="btn btn-primary" (click)="closeModal(user)" data-bs-dismiss="modal">Fermer</button>
+          <button *ngIf="user.estBloquer" type="button" class="btn btn-danger" (click)="ValiderBloquage(user.idUtilisateur)" data-bs-dismiss="modal">Bloquer</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

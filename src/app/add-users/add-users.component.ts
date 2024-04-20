@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../services/user.service";
 import {Router} from "@angular/router";
 import {Utilisateur} from "../models/Utilisateur";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-add-users',
@@ -13,7 +14,7 @@ export class AddUsersComponent implements OnInit {
   userForm!: FormGroup;
   user: Utilisateur = new Utilisateur();
 
-  constructor(public fb: FormBuilder, private userService: UserService, private router: Router) {
+  constructor(public fb: FormBuilder, private userService: UserService, private router: Router,private toasterService:ToastrService) {
   }
 
   ngOnInit() {
@@ -34,7 +35,6 @@ export class AddUsersComponent implements OnInit {
     this.user.adresse = this.userForm.value.adresse;
     this.user.numeroTel = this.userForm.value.numeroTel;
     this.user.roles = this.userForm.value.role;
-    console.log(this.user)
     let data = {
       nom: this.userForm.value.nom,
       prenom: this.userForm.value.prenom,
@@ -46,11 +46,13 @@ export class AddUsersComponent implements OnInit {
     };
     this.userService.addUser(data).subscribe({
       next: data => {
+        this.toasterService.success("Utilisateur ajouter avec succés","Infos")
+        this.router.navigateByUrl("/user-list");
         console.log(data);
       },
       error: err => {
-        console.log(err);
-      }
+        this.toasterService.error("Utilisateur ajouter avec succés")
+        console.log(err);      }
     })
   }
 }

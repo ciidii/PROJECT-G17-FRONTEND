@@ -19,6 +19,7 @@ import {FinancialInformationComponent} from "./financial-information/financial-i
 import {AlerteComponent} from "./alerte/alerte.component";
 import {FirstLoginComponent} from "./first-login/first-login.component";
 import {BlockUserComponent} from "./block-user/block-user.component";
+import {UserDetailsComponent} from "./user-details/user-details.component";
 
 const routes: Routes = [
   {path: "login", component: LoginPageComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
     {path: "block-page", component: BlockUserComponent, canActivate: [authenticationGuard]},
   {
     path: "G17GB", component: HomeComponent, children: [
+      {path: "profile", component: UserDetailsComponent, canActivate: [authenticationGuard]},
       {
         path: "admin", component: AdminAreasComponent, children: [
           {path: "add-article", component: AddArticleComponent},
