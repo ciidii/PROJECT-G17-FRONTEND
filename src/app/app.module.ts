@@ -31,6 +31,7 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import {SpinnerInterceptor} from "./interceptors/spinner-interceptor";
 import {UserDetailsComponent} from './user-details/user-details.component';
 import {UserDetailModalComponent} from './user-detail-modal/user-detail-modal.component';
+import {NgxDropzoneModule} from "ngx-dropzone";
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import {UserDetailModalComponent} from './user-detail-modal/user-detail-modal.co
       timeOut: 1000
 
     }),
+    NgxDropzoneModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true},

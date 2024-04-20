@@ -9,6 +9,7 @@ import {AuthState} from "../models/AuthState";
   providedIn: 'root'
 })
 export class AuthService {
+  private url = "http://localhost:8080/backend";
   roles: any;
   identifier!: any;
   accessToken!: any;
@@ -23,7 +24,8 @@ export class AuthService {
       identifiant: username,
       motDePasse: password
     };
-    return this.http.post("http://localhost:8080/backend/utilisateurs/connexion", JSON.stringify(body), options);
+
+    return this.http.post(this.url + "/utilisateurs/connexion", JSON.stringify(body), options);
   }
 
   loadProfile(data: any) {
