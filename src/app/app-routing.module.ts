@@ -33,6 +33,7 @@ const routes: Routes = [
       {
         path: "admin", component: AdminAreasComponent, children: [
           {path: "add-article", component: AddArticleComponent},
+          {path: "list-article", component: ArticlesComponent},
           {path: "add-user", component: AddUsersComponent},
           {path: "users-list", component: UsersListComponent},
           {path: "alert", component: AlerteComponent},

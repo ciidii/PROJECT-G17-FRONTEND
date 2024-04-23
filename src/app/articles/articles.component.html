@@ -1,1 +1,13 @@
-<p>articles works!</p>
+<div class="container-fluid flex-column pt-2">
+  <div class="row">
+    <div *ngFor="let article of articles" class="col-md-4">
+      <div class="card mb-3">
+        <img src="{{ article.images[0] }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ article.nomArticle }}</h5>
+          <p class="card-text" style="max-height: 100px; overflow: hidden">{{ article.descriptionArticle }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

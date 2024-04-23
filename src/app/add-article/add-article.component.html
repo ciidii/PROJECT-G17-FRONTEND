@@ -1,53 +1,46 @@
-<h4  class="text-center mt-3">Ajout d'article</h4>
+<h4 class="text-center mt-3">Ajout d'article</h4>
 <form [formGroup]="articleForm" (ngSubmit)="ajouterArticle()" class="needs-validation" novalidate>
-  <div class="container p-3">
+  <div class="container mt-3">
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="mb-3">
           <label for="nomArticle" class="form-label">Nom de l'article</label>
-          <input type="text" class="form-control" id="nomArticle" formControlName="nomArticle" placeholder="Nom de l'article" required>
+          <input type="text" class="form-control" id="nomArticle" formControlName="nomArticle"
+                 placeholder="Nom de l'article" required>
           <div class="invalid-feedback">
             Veuillez entrer le nom de l'article.
           </div>
         </div>
-        <div class="form-group mt-3">
-          <label class="m-1">Catégorie</label>
-          <select class="form-control" formControlName="idCategorie">
+        <div class="mb-3">
+          <label for="idCategorie" class="form-label">Catégorie</label>
+          <select class="form-select" id="idCategorie" formControlName="idCategorie">
             <option value="" style="color: #999;" selected disabled>Sélectionnez la catégorie</option>
-
-            <option *ngFor="let categorie of categories" value="{{categorie.idCat}}">{{categorie.nomCat}}</option>
+            <option *ngFor="let categorie of categories" [value]="categorie.idCat">{{ categorie.nomCat }}</option>
           </select>
+          <div class="invalid-feedback">
+            Veuillez sélectionner une catégorie.
+          </div>
         </div>
         <div class="mb-3">
           <label for="descriptionArticle" class="form-label">Description de l'article</label>
-          <textarea class="form-control" id="descriptionArticle" formControlName="descriptionArticle" placeholder="Description de l'article" required style="resize: none;"></textarea>
+          <textarea class="form-control" id="descriptionArticle" formControlName="descriptionArticle"
+                    placeholder="Description de l'article" required style="resize: none;"></textarea>
           <div class="invalid-feedback">
             Veuillez entrer la description de l'article.
           </div>
         </div>
-        <!-- Quantité en stock -->
         <div class="mb-3">
           <label for="qttStock" class="form-label">Quantité en stock</label>
-          <input type="number" class="form-control" id="qttStock" formControlName="qttStock" placeholder="Quantité en stock" required>
+          <input type="number" class="form-control" id="qttStock" formControlName="qttStock"
+                 placeholder="Quantité en stock" required>
           <div class="invalid-feedback">
             Veuillez entrer la quantité en stock.
           </div>
         </div>
         <div class="mb-3">
           <label class="form-label">Images de l'article</label>
-          <ngx-dropzone
-            class="dropzone"
-            [maxFileSize]="1000000"
-            [multiple]="true"
-            (change)="onFilesAdded($event)"
-            accept="image/*"
-          ></ngx-dropzone>
-          <p *ngIf="filesToUpload.length==0" class="text-muted mt-2">Glissez-déposez les images ici ou cliquez pour sélectionner.</p>
-          <p  *ngIf="filesToUpload.length!=0" class=" text-muted mt-2" style="color: green;">{{filesToUpload.length}} Image <span *ngIf="filesToUpload.length>1">s</span>sélectionné<span *ngIf="filesToUpload.length>1">s</span></p>
+          <input (change)="onFilesAdded($event)" type="file" class="form-control" multiple accept="image/*">
         </div>
-
-
-        <!-- Bouton d'envoi -->
         <button [disabled]="articleForm.invalid" type="submit" class="btn btn-primary">Ajouter l'article</button>
       </div>
     </div>

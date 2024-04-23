@@ -31,7 +31,7 @@
              aria-expanded="false">Articles</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" *ngIf="authState.user.roles.includes('ROLE_ADMIN')" [routerLink]="['admin/add-article']">Ajouter</a>
-            <a class="dropdown-item" *ngIf="authState.user.roles.includes('ROLE_FINANCIER')" href="">Afficher</a>
+            <a class="dropdown-item" *ngIf="authState.user.roles.includes('ROLE_ADMIN') || authState.user.roles.includes('ROLE_FINANCIER')" [routerLink]="['admin/list-article']">Afficher</a>
             <a class="dropdown-item" *ngIf="authState.user.roles.includes('ROLE_FINANCIER')" href="#">Paramétre prix</a>
             <a class="dropdown-item" *ngIf="authState.user.roles.includes('ROLE_FINANCIER')" href="#">Rendre Vendable</a>
           </div>
